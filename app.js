@@ -6,10 +6,14 @@ import { db } from './models/index.js';
 
 (async () => {
   try {
-    await db.mongoose.connect(db.url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await db.mongoose
+      .connect(db.url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() => {
+        console.log('Connected to MongoDb.');
+      });
   } catch (error) {
     process.exit();
   }
@@ -30,4 +34,6 @@ app.get('/', (req, res) => {
   res.send('API em execucao');
 });
 
-app.listen(process.env.PORT || 8081, () => {});
+app.listen(process.env.PORT || 8081, () => {
+  console.log('API em execucao.');
+});
